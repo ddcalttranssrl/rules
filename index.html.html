@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reguli de Conduită — Ridesharing</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+    .header {
+      background: #c0392b;
+      color: white;
+      text-align: center;
+      padding: 20px 16px 14px;
+    }
+    .header h1 { font-size: 1.4em; font-weight: 800; letter-spacing: 1px; }
+    .header p { font-size: 0.85em; margin-top: 4px; opacity: 0.9; }
+
+    .translate-bar {
+      background: #fff;
+      border-bottom: 2px solid #e0e0e0;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .translate-bar label { font-size: 0.85em; font-weight: 600; color: #555; }
+    #langSelect {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.9em;
+      flex: 1;
+      max-width: 260px;
+    }
+    #translateBtn {
+      background: #c0392b;
+      color: white;
+      border: none;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-size: 0.88em;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    #translateBtn:hover { background: #a93226; }
+
+    .content { padding: 16px; max-width: 700px; margin: 0 auto; }
+
+    .forbidden-box {
+      background: #c0392b;
+      color: white;
+      border-radius: 10px;
+      text-align: center;
+      padding: 18px 12px 14px;
+      margin-bottom: 18px;
+    }
+    .forbidden-box .interzis { font-size: 2em; font-weight: 900; letter-spacing: 3px; }
+    .forbidden-box .rule-highlight {
+      font-size: 1.1em;
+      font-weight: 800;
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+    .forbidden-box .rule-sub { font-size: 0.85em; margin-top: 4px; opacity: 0.92; }
+
+    .section {
+      background: white;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .section-title {
+      background: #c0392b;
+      color: white;
+      font-weight: 700;
+      font-size: 0.85em;
+      padding: 8px 14px;
+      letter-spacing: 0.5px;
+    }
+    .section ul {
+      list-style: none;
+      padding: 10px 14px;
+    }
+    .section ul li {
+      padding: 5px 0 5px 18px;
+      font-size: 0.88em;
+      line-height: 1.4;
+      border-bottom: 1px solid #f0f0f0;
+      position: relative;
+    }
+    .section ul li:last-child { border-bottom: none; }
+    .section ul li::before {
+      content: '■';
+      color: #c0392b;
+      position: absolute;
+      left: 0;
+      font-size: 0.6em;
+      top: 8px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 18px;
+      font-size: 0.85em;
+      color: #888;
+      font-weight: 600;
+    }
+
+    /* Google Translate widget hidden */
+    .goog-te-banner-frame { display: none !important; }
+    body { top: 0 !important; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>REGULI DE CONDUITĂ — RIDESHARING</h1>
+  <p>Respectați aceste reguli pentru o călătorie plăcută și sigură!</p>
+</div>
+
+<div class="translate-bar">
+  <label for="langSelect">🌍 Traduceți în:</label>
+  <select id="langSelect">
+    <option value="">— Selectați limba —</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="fr">🇫🇷 Français</option>
+    <option value="de">🇩🇪 Deutsch</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="it">🇮🇹 Italiano</option>
+    <option value="ar">🇸🇦 العربية</option>
+    <option value="zh-CN">🇨🇳 中文</option>
+    <option value="ru">🇷🇺 Русский</option>
+    <option value="tr">🇹🇷 Türkçe</option>
+    <option value="uk">🇺🇦 Українська</option>
+    <option value="hi">🇮🇳 हिन्दी</option>
+    <option value="pt">🇧🇷 Português</option>
+    <option value="pl">🇵🇱 Polski</option>
+    <option value="hu">🇭🇺 Magyar</option>
+    <option value="bg">🇧🇬 Български</option>
+  </select>
+  <button id="translateBtn" onclick="doTranslate()">Traduceți</button>
+</div>
+
+<div class="content" id="mainContent">
+
+  <div class="forbidden-box">
+    <div class="interzis">INTERZIS</div>
+    <div class="rule-highlight">NU STAȚI CU PICIORUL PESTE PICIOR</div>
+    <div class="rule-sub">Vă rugăm să adoptați o postură corectă</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">ÎNAINTE DE CĂLĂTORIE</div>
+    <ul>
+      <li>Verifică datele șoferului și mașinii înainte de a urca (nume, foto, nr. înmatriculare)</li>
+      <li>Fii la locul stabilit la timp — nu face șoferul să aștepte inutil</li>
+      <li>Nu solicita șoferului să te aștepte mai mult decât permite aplicația</li>
+      <li>Introduceți corect destinația în aplicație înainte de plecare</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">ÎN TIMPUL CĂLĂTORIEI</div>
+    <ul>
+      <li>Salută șoferul la urcare și comportă-te respectuos</li>
+      <li>Nu sta cu piciorul peste picior — adoptă o postură corectă</li>
+      <li>Nu consuma mâncare sau băuturi!</li>
+      <li>Nu fuma, nu vapa și nu consuma alcool în vehicul</li>
+      <li>Nu pune muzică, nu sta pe TikTok, nu vorbi pe difuzor sau alte aplicații decât în căști</li>
+      <li>Nu distrage atenția șoferului în timpul mersului</li>
+      <li>Respectă numărul maxim de pasageri admis în aplicație</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">COMPORTAMENT GENERAL</div>
+    <ul>
+      <li>Tratează vehiculul ca pe proprietatea ta — nu murdări și nu deteriora nimic</li>
+      <li>Nu trânti portierele la coborâre</li>
+      <li>Nu lăsa gunoaie în mașină</li>
+      <li>Fii amabil și politicos — șoferul este la locul său de muncă</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">LA FINALUL CĂLĂTORIEI</div>
+    <ul>
+      <li>Verifică dacă ai luat toate obiectele personale înainte de a coborî</li>
+      <li>Lasă o recenzie corectă și obiectivă șoferului</li>
+      <li>Dacă ai uitat ceva, contactează șoferul prin aplicație, nu prin număr personal</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">Vă mulțumim! Călătorie plăcută! 🚗</div>
+
+<!-- Google Translate -->
+<div id="google_translate_element" style="display:none"></div>
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'ro',
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+
+  function doTranslate() {
+    var lang = document.getElementById('langSelect').value;
+    if (!lang) { alert('Selectați o limbă mai întâi!'); return; }
+    // Use Google Translate URL approach - works without API key
+    var currentUrl = encodeURIComponent(window.location.href);
+    var gtUrl = 'https://translate.google.com/translate?sl=ro&tl=' + lang + '&u=' + currentUrl;
+    window.location.href = gtUrl;
+  }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
